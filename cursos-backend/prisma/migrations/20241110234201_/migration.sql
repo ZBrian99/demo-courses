@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Pago" ALTER COLUMN "monto" SET DATA TYPE TEXT;

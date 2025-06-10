@@ -1,0 +1,363 @@
+
+  si un alumno se inscribe a la misma comision 2 veces por vendedores separados corregirlo.
+
+
+
+
+Ya:
+
+  Actualizacion de todos los textos y diseño general.
+
+#  añadir la paginacion en cursos, comisiones y formularios. tambien al editar la comision y en los detalles del curso.
+
+#  en las comisiones en la parte de profes y vendedores actualizar para que los muestre incluido el profesorvendedor en ambos casos.
+
+# app routes!!!
+
+#  verificar permisos de usuarios en toda la app.
+# en el excel neto entre tolta pagado  fecha de inscripcion vacio para rellenar.
+
+# Cambios a la creacion de comisiones (evitar mapear todos los horarios en cada cambio de horario).
+
+# Vista de alumnos y usuarios separados. 
+
+Revision del sistema de permisos de usuarios.
+
+verifiar nuevo formato de horario en todos los lugares.
+
+# (alta) Nueva vista de alumnos separados de usuarios y en usuarios no mostrar alumnos.
+
+# (media) añadir nuevo sistema de añadir links con Titulo y url.
+
+
+(bajo) el ancho del total pagado automatico.
+
+(bajo) en el excel que sea una pagina por vendedor en vez de todos juntos.
+
+(bajo) añadir campo en el registro para poder añadir las redes sociales. 
+
+(bajo) paso 2 en preinscripcion se hace siempre y se autocompleta.
+
+(baja) al crear una comision, actualizar diseño, añadir la carga horaria automatica y manual.
+
+(baja) añadir nuevo panel de asignacion de personal
+
+(bajo) solucioanr bug de la navegacion al darle a comision lleva a la inscripcion.
+
+(bajo) en los pagos poder editarlos y eliminarlos.
+
+(bajo) actualizar filtro de inscripciones. para que busque por vendedor.
+
+Inscripciones: 
+
+  (bajo) Verificar filtro por vendedor en inscripciones
+
+  (bajo) Al añadir un pago, antes de añadirlo mostrar el modal de observaciones o combinarlos.
+
+  (bajo) en el modal de pagos poder ver el estado y poder cambiarlo desde el mismo modal.
+
+  (baja) en pagos añadir un nuevo input que se llame numero de cuota. switch automatico.
+
+  (bajo) actualizar el excel con el numero de cuotas
+
+  (baja) comentario en los pagos obligatorios texto modificarlo
+
+  (bajo) en observaciones todos los inputs obligatorios
+
+  (bajo) añadir en la lista de inscripciones el boton de excel que funcione con los filtros aplicados a la lista
+
+  (bajo) en los detalles mostrar los nuevos campos justo entre medio de donde salen los cursos y los datos del alumno.
+
+Generales: 
+
+  (baja) revisar mixto y cambiar por pres + virtual.
+
+  (bajo) Aclarar en donde salgan horarios que es argentina de momento.
+
+  (bajo) Cambiar formato de hora a 24hs.
+
+  (media ) Aumentar ancho a 100rems y hacer que las tablas sean fit-content
+  
+(media) Añadir loader (en boton o modal) para cuando se esta cargando algo.
+
+  (media) Añadir mensajes de estado (abajo a la derecha con color icono y mensaje)
+
+  (media) definir estilo general de las diferentes vistas.
+
+  (muy baja) filtros de busqueda en todas las vistas.
+
+  (muy baja) añadir colores y estilos distintivos a ciertos campos y estados en las tablas.
+
+(alto) añadir verificaciones de permisos en todo el sistema.
+
+(bajo) si se inscribio con alguien mas marcarlo de alguna manera en la lista.
+
+
+Preinscripcion:
+
+  (muy baja) al cambiar de paso llevar al top de la pagina.
+
+  (muy baja) dar minimo alto al modal.
+
+  (baja) redireccionar a wpp automaticamente al completar el formulario de inscripcion con un wa.me personalizado.
+
+  (baja) personalizacion del mensaje de finalizacion de preinscripcion.
+
+  (baja) si el alumno no cumple los requisitos para la inscripcion, no deberia poder inscribirse (añadir mensaje tambien del error).
+
+  # (muy baja) guardar en local host el numero de dni para autocompletar.
+
+  # (media) verificar si ya esta inscrito en la comision.
+
+
+Inicio de sesion: 
+
+(baja) actualizar inputs.
+
+  (baja) estilar inicio de sesion.
+
+  (baja) limitar peticiones y bloquear temporalmente en caso de spam
+
+Perfil personal: 
+  (baja) Crear pestaña de perfil personal.
+
+  (baja) añadir funcion de editar perfil personal.
+
+Cursos: 
+  
+  (alta) definir vista.
+
+  cursos requeridos añadir paginacion
+
+  (medio) añadir filtros.
+
+  (muy baja) quitar añadir imagen de portada.
+
+  (media) actualizar vista de comisiones dentro de detalles del curso.
+
+Comisiones:
+
+  (bajo) siempre un vendedor por comision y siempre un link minimo obligatorio.
+
+  (baja) cambiar modalidad mixto por "presencial + virtual"
+
+  (media) input para crear/editar carga horaria y que se calcule automaticamente en base a las clases añadidas en caso de no añadirlo.
+
+  (baja) al añadir un horario de inicio el de fin se precalcula 2 horas despues.
+
+  (media) filtro de fecha de inicio y fin (solucionar error de que no se filtra correctamente fecha fin).
+
+  (media) los filtros de rango de fecha seran mes y año no dia.
+
+  (media) añadir la posibilidad de seleccionar en caso de que la comision sea mixta si el horario es presencial o virtual.
+
+  (media) añadir boton para en un horario repetirlo en todo el rango de fecha de la comision.
+
+  (alta) funcionalidad de asignar profesional y ahi seleccionar si es profesor, vendedor u otro (para simplificar la cantidad de pasos).
+
+  (alta) quitar vista resumen final de creacion de comision.
+
+  (media) modificar seccion de añadir enlaces para que sea tipo de enlace y la url.
+
+  (alta) añadir roles multiples**
+
+  (alta) integrar clases ciclicas.
+
+
+Formularios: 
+
+  (alta) cambiar algoritmo para obtener comision y curso relacionado o añadirlo directamente al formulario.
+
+  (alta) si se quita una comision da error.
+
+  (media) actualizar selectores de curso y comisiones, solo mostrar cursos con comision y en las comisiones solo mostrar las de ese curso.
+
+  (bajo) si el curso seleccionado no tiene comisiones marcar disabled el select de comisiones.
+
+  (media) añadir input para  descripcion al formulario (texto enriquecido).
+
+  (bajo) Evitar que se pueda enviar una stage vacia.
+
+  (media) añadir tipo fecha.
+
+  (baja) añadir tipo desplegable.
+
+  (media) revisar datos que se deben mostrar en todas las tablas y formato.
+
+  (baja) solo para el admin
+
+Usuarios:
+
+  (media) solo el admin puede modificar los datos
+
+  (alta) resolver bug de que no se renderizan bien los inputs
+
+  (media) solo mostrar alumnos relacionados al usuario logueado.
+
+  (media) resolver bug de que deja editar el rol.
+
+Profesores:
+
+  (media) una vista de comisiones. dentro de ella ver los formularios en el formulario poder filtrar por etapas y plantear tambien por preguntas con desplegables para poder ver y descargar en excel.
+
+
+  Vendedor y ProfesorVendedor:
+
+  - no vera pestaña de cursos
+  - no vera pestaña de comisiones 
+  - no vera pestaña de formularios
+  - vera pestaña de usuarios relacionados con el.
+  - vera pestaña de inscripciones completa relacionada con el.
+
+  Finanzas:
+  - no vera pestaña de comisiones
+  - no vera pestaña de formularios
+  - vera pestaña de usuarios completa.
+  - vera pestaña de inscripciones completa.
+  - podra generar el excel de inscripciones.
+
+
+
+Hechas:
+
+
+  # (alto) añadir nuevo input tipo fecha al crear el formulario y al mapear las preguntas y respuestas.
+
+  # (muy baja) añadir descripcion del curso en el paso 3.
+
+  # (muy baja) añadir fecha fin en el paso 3.
+
+  # (muy baja) añadir descripcion del formulario en el paso 4.
+
+
+ # (media) traer boton de copiar link a la vista de inscripciones.
+
+  # (alto) exportacion de excel por modal de fecha de inicio y fin en cada comision.
+
+  # (alto)  quitar de la lista mail y dni
+
+  # (alto) añadir columnos valor acordado, observaciones y cantidad de cuotas en la lista de inscripciones.
+
+  # (alto) crear modal para añadir observaciones a la inscripcion(valor acordado, cantidad de cuotras y observaciones).
+
+  # (alto) añadir campo pago que sume el total de todos los pagos y en caso de ser de diferentes monedas que las separe con un signo mas.
+
+  # (medio) en el modal de pagos añadir switch de cuenta propia y añadirlo como columna en la lista de pagos.
+
+  # (bajo) arreglar pais y telefono mas listados en la lista de inscripciones.
+
+# Link de inscripción en la parte de comisión de inacripciones.
+
+  # En la parte de comision boton de excel que lleve a una vista o abra  un modal para seleccionar fecha inicio y fecha fin. Boton de generar y descargar (para descargar el excel con los datos de todas las inscripciones dentro de una comision)
+
+
+
+  #  estos  valores se mostraran en la en columnas de la lista de inscripciones.
+  #  (Se pueden añadir tambien en los detalles)
+
+
+  # Inscripciones no hace falta  la columna mail ni el dni. 
+
+  # Añadir un nuevo modal como el de cargar pago pago perp para añadir o notas u observaciones, debe tener valor acordado, observacion, cantidad de cuotas. 
+
+  # Mostrar en la lista de inscripciones una nueva columna pago total (se mostrara la suma de los pagos separados por moneda)
+
+  # En el modal de añadir pago, añadir un switch o similar para marcar si es o no cuenta propia. Y listarlo en la lista de pagos. 
+
+  # Añadir los 5 estados de inscripcion con icono y color distintivos, pendiente, parcial, completo, Cancelado, inactivo. amarillo, azul o naranja, verde, rojo, gris.
+
+  # El boton de cambiar estado es un desplegable con los 5 estados.
+  
+# al añadir un pago verificar formato de fecha y moneda
+
+# si ingreso la fecha manual puede dar error pero si la ingreso con el modal no, verificar en toda al app
+# (controlado, que no se envie si es una fecha invalida, actualmente se envia siempre!)
+
+
+#  Añadir a la obsercacion un campo de observacion general.
+
+# inscripciones vista por comision con filtro por curso y generales.
+
+# dentro de una comision por inscripcion que se vea, Nombre, fecha de inscripcion, pais, telefono y un campo de observaciones que les aparezca adelate con tooltip para verlo completo. quitar vendedor si el rol es vendedor o vendedorxprofesor, quitar curso.
+
+# Comisiones se generan dobles (verificar este error y resolverlo en todos lados)
+
+# añadir paginacion personalizada por 20,50,100 elementos. 
+
+# pensar como pasar la paginacion total.
+
+# pensar como implementar sistema para pasar la cantidad de preinscriptos a inscriptos por comision al solicitar las inscripciones.
+
+
+# Tipografias?
+
+
+  # Deberia haber una zona de inscripciones donde se ven todas y al darle ahi deberia estar la informacion del alumno y la comision a la que se inscribio, el vendedor que la vendio, las referencias al formulario y comision, curso. Y ademas el registro de pagos.
+
+  # La parte del historia? la parte de vista de las respuestas de los formularios? siguiente etapa.
+
+  # (alto) definir vista completa.
+  # (alto) añadir pagos a  inscripcion.
+  # (alto) añadir detalles de la inscripcion.
+
+
+  
+  # (muy baja) Quitar modo oscuro
+
+  # (muy baja) guardar en localstorage el modo de la sidebar.
+
+  # (media) hay veces que al abrir por primera vez la pagina se queda en blanco (se soluciona al recargar).
+
+
+  # (null) filtros por estado activo/inactivo en todas las vistas (por el momento no hacen falta).
+
+  # (muy baja) añadir boton para limpiar filtros en todas las vistas.
+
+  # (muy baja) añadir breadcrumb en todas las vistas.
+
+
+  # (media) preparar select con loader.
+
+  # (bajo) verificar paginacion al actualizar los datos de la tabla.
+
+
+    # (media) en toda la parte de referido registro y preinscripcion van los labels separados del input.
+
+  # (muy baja) mensajes de error genericos.
+
+  # (muy baja) en el ultimo paso mostrar fecha inicio.
+
+  # (media) crear pagina en caso de que el link de referido este mal o no exista.
+
+  # (alta) actualizar texto de los pasos.
+
+  # (baja) verificar subida al backend de las respuestas del formulario de preinscripcion.
+
+  # (media) verificar que no se envia dos veces la preinscripcion
+
+
+    # (media) boton para definir si el dia y horario de una clase es presencial o virtual.
+
+  # (media) seleccion de modalidad antes que los dias horarios (para facilitar boton de si es horario presencial o virtual)
+
+  # (alta) input para crear/editar codigo de comision
+
+  # (media) al añadir los dias y horarios añadir boton para poder establecer si son ciclicos (se repiten cada semana automaticamente).
+
+  # (alta) añadir funcionalidad de asignar profesores a comisiones.
+
+  
+  # (muy alta) al borrar un formulario se borra la comision.
+
+  # (media) añadir input para añadir nombre al formulario (para uso interno).
+
+  # (alta) si no hay comision asignaa, el sistema envia peticiones infinitas.
+
+  # (alta) ordenar stage, preguntas y opciones.
+
+  Futuro:
+
+  - Añadir TanStack Table, tablas completamente personalizables.
+
+  (muy baja) lista de posibles mejoras que se pueden aplicar a todo el sistema para mejorarlo en proximas etapas.
+

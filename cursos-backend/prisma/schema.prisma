@@ -1,0 +1,310 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id              String    @id @default(uuid())
+  nombre          String
+  apellido        String?
+  fechaNacimiento DateTime?
+  profileImage    String?
+  email           String    @unique
+  telefono        String?   @unique
+  pais            String?
+  provincia       String?
+  ciudad          String?
+  tipoDni         String?
+  dni             String?   @unique
+  resume          String?
+  profesion       String?
+  password        String?
+  rol             String    @default("USUARIO")
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  alumno   Alumno?
+  profesor Profesor?
+  vendedor Vendedor?
+  finanzas Finanzas?
+  admin    Admin?
+}
+
+model Alumno {
+  id            String                @id @default(uuid())
+  usuario       Usuario               @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId     String                @unique
+  inscripciones Inscripcion[]
+  observaciones ObservacionProfesor[]
+
+  // primerInscripcion     DateTime?
+  // instagram             String?
+  // practicasSupervisadas String?
+}
+
+model Profesor {
+  id            String                @id @default(uuid())
+  usuario       Usuario               @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId     String                @unique
+  comisiones    AsignacionProfesor[]
+  observaciones ObservacionProfesor[]
+}
+
+model Vendedor {
+  id            String               @id @default(uuid())
+  usuario       Usuario              @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId     String               @unique
+  comisiones    AsignacionVendedor[]
+  inscripciones Inscripcion[]
+  pagos         Pago[]
+}
+
+model Finanzas {
+  id        String  @id @default(uuid())
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId String  @unique
+}
+
+model Admin {
+  id        String  @id @default(uuid())
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId String  @unique
+}
+
+model Curso {
+  id                       String     @id @default(uuid())
+  codigo                   String?    @unique
+  nombre                   String
+  descripcion              String?
+  modalidad                String?
+  clases                   Int?
+  horas                    Int?
+  mesesPracticaSupervisada Int?
+  isActive                 Boolean    @default(true)
+  createdAt                DateTime   @default(now())
+  updatedAt                DateTime   @updatedAt
+  comisiones               Comision[]
+
+  imagenPortada String?
+
+  cursosRequeridos Curso[] @relation("Requisitos")
+  requeridoPor     Curso[] @relation("Requisitos")
+}
+
+model Comision {
+  id             String        @id @default(uuid())
+  codigoComision String?       @unique
+  fechaInicio    String
+  fechaFin       String
+  clases         String?
+  modalidad      String?       @default("Presencial")
+  pais           String?
+  provincia      String?
+  ubicacion      String?
+  inscripciones  Inscripcion[] // Relación con inscripciones
+
+  // Relación uno a uno con Formulario
+  formulario     Formulario? @relation(fields: [formularioId], references: [id], onDelete: SetNull)
+  formularioId   String?     @unique
+  cupo           String?
+  classroomLinks String[]
+  whatsappLinks  String[]
+  infoLinks      String[]
+
+  links Link[]
+
+  horarios Horario[]
+  cargaHoraria String?
+
+  isActive      Boolean               @default(true)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  cursoId       String
+  curso         Curso                 @relation(fields: [cursoId], references: [id], onDelete: Cascade)
+  profesores    AsignacionProfesor[]
+  vendedores    AsignacionVendedor[]
+  observaciones ObservacionProfesor[]
+}
+
+model Link {
+  id         String   @id @default(uuid())
+  titulo     String
+  url        String
+  comision   Comision @relation(fields: [comisionId], references: [id], onDelete: Cascade)
+  comisionId String
+}
+
+// FORMULARIO Y SUS RELACIONES
+model Formulario {
+  id          String    @id @default(uuid())
+  title       String    @unique
+  nombre      String?   @unique
+  descripcion String?
+  comision    Comision?
+  comisionId  String?   @unique
+
+  stages    Etapa[]
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Etapa {
+  id         String     @id @default(uuid())
+  title      String
+  order      Int?
+  formulario Formulario @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formId     String
+  questions  Pregunta[]
+}
+
+model Pregunta {
+  id         String       @id @default(uuid())
+  text       String
+  type       TipoPregunta
+  isRequired Boolean      @default(false)
+  options    Opcion[]
+  etapa      Etapa        @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  stageId    String
+  respuestas Respuesta[]
+  order      Int?
+}
+
+model Opcion {
+  id         String            @id @default(uuid())
+  text       String
+  order      Int?
+  value      String?
+  pregunta   Pregunta          @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+  respuestas RespuestaOpcion[] // Relación hacia la tabla intermedia RespuestaOpcion
+}
+
+model Respuesta {
+  id            String            @id @default(uuid())
+  textValue     String?
+  opciones      RespuestaOpcion[] // Relación con la tabla intermedia RespuestaOpcion
+  pregunta      Pregunta          @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId    String
+  type          TipoPregunta
+  inscripcion   Inscripcion       @relation(fields: [inscriptionId], references: [id], onDelete: Cascade)
+  inscriptionId String
+}
+
+// Tabla intermedia para la relación many-to-many entre Respuesta y Opcion
+model RespuestaOpcion {
+  respuesta   Respuesta @relation(fields: [respuestaId], references: [id], onDelete: Cascade)
+  respuestaId String
+  opcion      Opcion    @relation(fields: [opcionId], references: [id], onDelete: Cascade)
+  opcionId    String
+
+  @@id([respuestaId, opcionId])
+}
+
+enum TipoPregunta {
+  TEXTO_CORTO
+  TEXTO_LARGO
+  SELECCION
+  CHECKBOX
+  FECHA
+  DESPLEGABLE
+  DESPLEGABLE_MULTIPLE
+}
+
+model Horario {
+  id            String   @id @default(uuid())
+  day           String
+  startTime     String
+  endTime       String
+  type          String?
+  repeatsWeekly Boolean  @default(false)
+  comisionId    String
+  comision      Comision @relation(fields: [comisionId], references: [id], onDelete: Cascade)
+}
+
+model Inscripcion {
+  id         String            @id @default(uuid())
+  alumnoId   String
+  comisionId String
+  vendedorId String?
+  respuestas Respuesta[]
+  pagos      Pago[]
+  estado     EstadoInscripcion @default(Pendiente)
+
+  observaciones  String?
+  totalAcordado  String?
+  cantidadCuotas String?
+
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  alumno   Alumno    @relation(fields: [alumnoId], references: [id], onDelete: Cascade)
+  comision Comision  @relation(fields: [comisionId], references: [id], onDelete: Cascade)
+  vendedor Vendedor? @relation(fields: [vendedorId], references: [id], onDelete: Cascade)
+}
+
+enum EstadoInscripcion {
+  Pendiente
+  Parcial
+  Completo
+  Cancelado
+  Inactivo
+}
+
+model Pago {
+  id            String   @id @default(uuid())
+  inscripcionId String
+  vendedorId    String?
+  moneda        String
+  monto         String
+  metodoPago    String
+  tipoPago      String
+  cuentaPropia  Boolean?
+  fechaPago     DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  observaciones String?
+
+  inscripcion Inscripcion @relation(fields: [inscripcionId], references: [id], onDelete: Cascade)
+  vendedor    Vendedor?   @relation(fields: [vendedorId], references: [id], onDelete: Cascade)
+}
+
+model AsignacionVendedor {
+  id           String   @id @default(uuid())
+  vendedorId   String
+  comisionId   String
+  linkReferido String   @unique @default(uuid())
+  vendedor     Vendedor @relation(fields: [vendedorId], references: [id], onDelete: Cascade)
+  comision     Comision @relation(fields: [comisionId], references: [id], onDelete: Cascade)
+
+  @@unique([vendedorId, comisionId])
+}
+
+model AsignacionProfesor {
+  id         String   @id @default(uuid())
+  profesorId String
+  comisionId String
+  profesor   Profesor @relation(fields: [profesorId], references: [id], onDelete: Cascade)
+  comision   Comision @relation(fields: [comisionId], references: [id], onDelete: Cascade)
+
+  @@unique([comisionId, profesorId])
+}
+
+model ObservacionProfesor {
+  id         String   @id @default(uuid())
+  profesorId String
+  alumnoId   String
+  comisionId String
+  comentario String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  profesor   Profesor @relation(fields: [profesorId], references: [id], onDelete: Cascade)
+  alumno     Alumno   @relation(fields: [alumnoId], references: [id], onDelete: Cascade)
+  comision   Comision @relation(fields: [comisionId], references: [id], onDelete: Cascade)
+}
