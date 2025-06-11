@@ -61,22 +61,43 @@ npm run start:dev
 - `GET /courses` - Listar cursos
 - `POST /courses` - Crear curso
 - `GET /courses/:id` - Obtener curso
-- `PUT /courses/:id` - Actualizar curso
+- `PATCH /courses/:id` - Actualizar curso
 - `DELETE /courses/:id` - Eliminar curso
 
 ### Comisiones
 - `GET /commissions` - Listar comisiones
-- `POST /commissions` - Crear comisión
+- `GET /commissions/enrollments` - Listar comisiones con inscripciones
 - `GET /commissions/:id` - Obtener comisión
-- `PUT /commissions/:id` - Actualizar comisión
-- `DELETE /commissions/:id` - Eliminar comisión
 
 ### Inscripciones
 - `GET /enrollments` - Listar inscripciones
-- `POST /enrollments` - Crear inscripción
 - `GET /enrollments/:id` - Obtener inscripción
-- `PUT /enrollments/:id` - Actualizar inscripción
-- `DELETE /enrollments/:id` - Eliminar inscripción
+- `POST /enrollments` - Crear inscripción
+- `PATCH /enrollments/:id/status` - Actualizar estado
+- `GET /enrollments/:id/payments` - Obtener pagos
+- `POST /enrollments/:id/payments` - Agregar pago
+- `POST /enrollments/:id/observations` - Agregar observación
+
+### Formularios
+- `GET /forms` - Listar formularios
+- `POST /forms` - Crear formulario
+- `GET /forms/:id` - Obtener formulario
+- `PATCH /forms/:id` - Actualizar formulario
+- `POST /forms/submit/:linkReferido` - Enviar respuestas
+- `POST /forms/referal-link` - Generar link de referido
+
+### Usuarios
+- `GET /users/staff` - Listar personal
+- `GET /users/students` - Listar alumnos
+- `GET /users/search/dni` - Buscar por DNI
+- `POST /users/register` - Registrar alumno
+- `GET /users/:id` - Obtener usuario
+- `PATCH /users/:id` - Actualizar usuario
+
+### Respuestas
+- `GET /responses/filtered` - Obtener respuestas filtradas
+- `GET /responses/enrollment` - Obtener respuestas por inscripción
+- `GET /responses` - Obtener todas las respuestas
 
 ## 🔒 Variables de Entorno
 
